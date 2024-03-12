@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:kafil/core/models/exception.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -52,12 +54,15 @@ class NetworkClient {
 
   Future<Map<String, dynamic>> post(
     String path, {
-    bool hashRequestBody = false,
     Object? data,
     String? token,
+        String? contentType,
   }) async {
     final Map<String, dynamic> headers = {};
+    headers['Accept'] = 'application/json';
+    headers['Accept-Language'] = 'ar';
     if (token != null) headers['Authorization'] = token;
+    if (contentType != null) headers['Content-Type'] = contentType;
 
     try {
       Response response = await _dio.post(
@@ -65,6 +70,7 @@ class NetworkClient {
         data: data,
         options: Options(headers: headers),
       );
+      log(response.toString());
       if (response.statusCode != null &&
           response.statusCode! < 300 &&
           response.data['status'] < 300) {

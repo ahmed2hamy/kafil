@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kafil/features/register/domain/entities/register_params.dart';
@@ -13,9 +14,9 @@ class RegisterCubit extends Cubit<RegisterState> {
   })  : _registerUseCase = registerUseCase,
         super(RegisterInitialState());
 
-  Future<void> register(RegisterParams registerParams) async {
+  Future<void> register(FormData requestFormData) async {
     emit(RegisterLoadingState());
-    final res = await _registerUseCase.call(registerParams);
+    final res = await _registerUseCase.call(RegisterParams(requestFormData: requestFormData));
 
     res.fold(
       (l) => emit(RegisterErrorState(errorMessage: l.message)),

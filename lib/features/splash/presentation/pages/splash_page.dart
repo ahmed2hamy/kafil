@@ -34,7 +34,7 @@ class _SplashPageState extends State<SplashPage> {
             ),
           );
         } else if (state is SplashErrorState) {
-          Dialogs.showErrorMessage(context, message: state.errorMessage);
+          Dialogs.showMessage(context, message: state.errorMessage);
         }
       },
       child: Scaffold(

@@ -36,21 +36,26 @@ class RegisterProvider extends ChangeNotifier {
     }
   }
 
-  List<int>? _skills;
+  List<String>? _skills;
 
-  List<int>? get skills => _skills;
+  List<String>? get skills => _skills;
 
-  void setSkills(List<int> skills) {
+  void setSkills(List<String> skills) {
     _skills = skills;
     notifyListeners();
   }
 
-  List<String>? _favoriteSocialMedia;
+  final List<String> _favoriteSocialMediaList = [];
 
-  List<String>? get favoriteSocialMedia => _favoriteSocialMedia;
+  List<String> get favoriteSocialMediaList => _favoriteSocialMediaList;
 
-  void setFavoriteSocialMedia(List<String> favoriteSocialMedia) {
-    _favoriteSocialMedia = favoriteSocialMedia;
+  void addToFavoriteSocialMedia(String favoriteSocialMedia) {
+    _favoriteSocialMediaList.add(favoriteSocialMedia);
+    notifyListeners();
+  }
+
+  void removeFromFavoriteSocialMedia(String favoriteSocialMedia) {
+    _favoriteSocialMediaList.remove(favoriteSocialMedia);
     notifyListeners();
   }
 
@@ -140,5 +145,21 @@ class RegisterProvider extends ChangeNotifier {
       _avatar = avatar;
       notifyListeners();
     }
+  }
+
+  void reset() {
+    _firstName = null;
+    _lastName = null;
+    _about = null;
+    _skills = null;
+    _favoriteSocialMediaList.clear();
+    _salary = null;
+    _password = null;
+    _passwordConfirmation = null;
+    _email = null;
+    _birthDate = null;
+    _gender = null;
+    _userType = null;
+    _avatar = null;
   }
 }

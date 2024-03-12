@@ -6,7 +6,7 @@ import 'package:kafil/constants/constants.dart';
 class EditableChipField extends StatefulWidget {
   final List<String> values;
   final String labelText;
-  final Function(List<String>)? onValuesChanged;
+  final void Function(List<String>)? onValuesChanged;
   final List<String>? selectedValues;
 
   const EditableChipField({

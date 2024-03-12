@@ -51,7 +51,7 @@ class _CountriesPageState extends State<CountriesPage> {
               child: BlocConsumer<HomeCubit, HomeState>(
                 listener: (context, state) {
                   if (state is HomeErrorState) {
-                    Dialogs.showErrorMessage(context,
+                    Dialogs.showMessage(context,
                         message: state.errorMessage);
                   }
                 },

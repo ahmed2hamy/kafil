@@ -1,9 +1,7 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:kafil/constants/constants.dart';
 import 'package:kafil/core/services/app_validators.dart';
-import 'package:kafil/core/widgets/chips_radio_options_widget.dart';
+import 'package:kafil/core/widgets/scrollable_fill_remaining_widget.dart';
 
 class RegisterWidget extends StatefulWidget {
   final List<String> userTypes;
@@ -38,109 +36,90 @@ class _RegisterWidgetState extends State<RegisterWidget> {
     return Form(
       key: widget.formKey,
       autovalidateMode: AutovalidateMode.onUserInteraction,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  Expanded(
-                    child: TextFormField(
-                      controller: widget.firstNameController,
-                      validator: AppValidators.fieldRequiredValidator,
-                      decoration: const InputDecoration(
-                        labelText: kFirstNameString,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 16.0,
-                  ),
-                  Expanded(
-                    child: TextFormField(
-                      controller: widget.lastNameController,
-                      validator: AppValidators.fieldRequiredValidator,
-                      decoration: const InputDecoration(
-                        labelText: kLastNameString,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 16.0),
-              TextFormField(
-                controller: widget.emailController,
-                validator: AppValidators.emailValidator,
-                keyboardType: TextInputType.emailAddress,
-                decoration: const InputDecoration(
-                  labelText: kEmailAddressString,
-                ),
-              ),
-              const SizedBox(height: 16.0),
-              TextFormField(
-                controller: widget.passwordController,
-                validator: AppValidators.passwordValidator,
-                obscureText: _passwordHidden,
-                keyboardType: TextInputType.visiblePassword,
-                decoration: InputDecoration(
-                  labelText: kPasswordString,
-                  suffixIcon: IconButton(
-                    onPressed: () {
-                      setState(() {
-                        _passwordHidden = !_passwordHidden;
-                      });
-                    },
-                    icon: Icon(
-                      _passwordHidden ? Icons.visibility_off : Icons.visibility,
+      child: ScrollableFillRemainingWidget(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 16.0),
+            Row(
+              children: [
+                Expanded(
+                  child: TextFormField(
+                    controller: widget.firstNameController,
+                    validator: AppValidators.fieldRequiredValidator,
+                    decoration: const InputDecoration(
+                      labelText: kFirstNameString,
                     ),
                   ),
                 ),
-              ),
-              const SizedBox(height: 16.0),
-              TextFormField(
-                controller: widget.passwordConfirmationController,
-                validator: (input) => AppValidators.passwordMatchValidator(
-                    input, widget.passwordController.text),
-                obscureText: _confirmPasswordHidden,
-                keyboardType: TextInputType.visiblePassword,
-                decoration: InputDecoration(
-                  labelText: kConfirmPasswordString,
-                  suffixIcon: IconButton(
-                    onPressed: () {
-                      setState(() {
-                        _confirmPasswordHidden = !_confirmPasswordHidden;
-                      });
-                    },
-                    icon: Icon(
-                      _confirmPasswordHidden
-                          ? Icons.visibility_off
-                          : Icons.visibility,
+                const SizedBox(
+                  width: 16.0,
+                ),
+                Expanded(
+                  child: TextFormField(
+                    controller: widget.lastNameController,
+                    validator: AppValidators.fieldRequiredValidator,
+                    decoration: const InputDecoration(
+                      labelText: kLastNameString,
                     ),
                   ),
                 ),
+              ],
+            ),
+            const SizedBox(height: 16.0),
+            TextFormField(
+              controller: widget.emailController,
+              validator: AppValidators.emailValidator,
+              keyboardType: TextInputType.emailAddress,
+              decoration: const InputDecoration(
+                labelText: kEmailAddressString,
               ),
-              const SizedBox(height: 16.0),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    kUserTypeString,
-                    style: kDefaultTextStyle,
+            ),
+            const SizedBox(height: 16.0),
+            TextFormField(
+              controller: widget.passwordController,
+              validator: AppValidators.passwordValidator,
+              obscureText: _passwordHidden,
+              keyboardType: TextInputType.visiblePassword,
+              decoration: InputDecoration(
+                labelText: kPasswordString,
+                suffixIcon: IconButton(
+                  onPressed: () {
+                    setState(() {
+                      _passwordHidden = !_passwordHidden;
+                    });
+                  },
+                  icon: Icon(
+                    _passwordHidden ? Icons.visibility_off : Icons.visibility,
                   ),
-                  const SizedBox(height: 8.0),
-                  ChipsRadioOptionsWidget(
-                    options: widget.userTypes,
-                    onSelected: (selectedIndex) {
-                      log(selectedIndex.toString());
-                    },
-                  ),
-                ],
+                ),
               ),
-            ],
-          ),
-        ],
+            ),
+            const SizedBox(height: 16.0),
+            TextFormField(
+              controller: widget.passwordConfirmationController,
+              validator: (input) => AppValidators.passwordMatchValidator(
+                  input, widget.passwordController.text),
+              obscureText: _confirmPasswordHidden,
+              keyboardType: TextInputType.visiblePassword,
+              decoration: InputDecoration(
+                labelText: kConfirmPasswordString,
+                suffixIcon: IconButton(
+                  onPressed: () {
+                    setState(() {
+                      _confirmPasswordHidden = !_confirmPasswordHidden;
+                    });
+                  },
+                  icon: Icon(
+                    _confirmPasswordHidden
+                        ? Icons.visibility_off
+                        : Icons.visibility,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -45,7 +45,7 @@ class _ChipsRadioOptionsWidgetState extends State<ChipsRadioOptionsWidget> {
                     setState(() {
                       _selectedValue = selected ? index : null;
                       widget.onSelected != null
-                          ? widget.onSelected!(index)
+                          ? widget.onSelected!(index + 1)
                           : null;
                     });
                   },

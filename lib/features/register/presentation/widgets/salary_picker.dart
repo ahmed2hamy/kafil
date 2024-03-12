@@ -7,6 +7,7 @@ class SalaryPicker extends StatefulWidget {
   final int maxSalary;
   final int initialSalary;
   final int? salary;
+  final void Function(int) onSalaryChanged;
 
   const SalaryPicker({
     super.key,
@@ -14,6 +15,7 @@ class SalaryPicker extends StatefulWidget {
     this.maxSalary = 1000,
     this.initialSalary = 500,
     required this.salary,
+    required this.onSalaryChanged,
   });
 
   @override
@@ -28,12 +30,15 @@ class _SalaryPickerState extends State<SalaryPicker> {
   void initState() {
     super.initState();
     _salary = widget.salary ?? widget.initialSalary;
+    widget.onSalaryChanged(_salary);
   }
 
   void _decrementSalary() {
     if (_salary > widget.minSalary) {
       setState(() {
         _salary -= _interval;
+
+        widget.onSalaryChanged(_salary);
       });
     }
   }
@@ -42,6 +47,8 @@ class _SalaryPickerState extends State<SalaryPicker> {
     if (_salary < widget.maxSalary) {
       setState(() {
         _salary += _interval;
+
+        widget.onSalaryChanged(_salary);
       });
     }
   }

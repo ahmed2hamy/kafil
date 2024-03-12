@@ -71,4 +71,16 @@ class AppValidators {
       return null;
     }
   }
+
+  static String? aboutMeTextValidator(String? input) {
+    if (_disableValidatorsForDebugging) return null;
+
+    if (input == null || input.isEmpty) {
+      return kFieldRequiredString;
+    } else if (input.length < 10 || input.length > 1000) {
+      return kABoutMeTextValidationMessageString;
+    }  else {
+      return null;
+    }
+  }
 }

@@ -32,7 +32,7 @@ class _ServicesPageState extends State<ServicesPage> {
         child: BlocConsumer<HomeCubit, HomeState>(
           listener: (context, state) {
             if (state is HomeErrorState) {
-              Dialogs.showErrorMessage(context, message: state.errorMessage);
+              Dialogs.showMessage(context, message: state.errorMessage);
             }
           },
           builder: (context, state) {

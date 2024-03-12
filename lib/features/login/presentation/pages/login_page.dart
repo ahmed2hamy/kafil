@@ -124,7 +124,7 @@ class _LoginPageState extends State<LoginPage> {
                   BlocConsumer<LoginCubit, LoginState>(
                     listener: (context, state) {
                       if (state is LoginErrorState) {
-                        Dialogs.showErrorMessage(
+                        Dialogs.showMessage(
                           context,
                           message: state.errorMessage,
                         );
